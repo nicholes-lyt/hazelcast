@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: hazelcast
+  profiles:
+    active: local
+
+logging:
+  file: ${spring.application.name}.log
+  root:
+    level: INFO
+
+---
+spring:
+  profiles: local
+  hazelcast-mancenter:
+    url: http://localhost:8080/hazelcast-mancenter
+    enable: false
+  vertx:
+    options:
+      workerPoolSize: 50
+      maxEventLoopExecuteTime: 2000000000
+      internalBlockingPoolSize: 50
+      clustered: false
+      hAEnabled: false
+      clusterPort: 8081
+      preferNativeTransport: true
+    server:
+      port: 8081
+  zk:
+    url: localhost:2181

@@ -1,0 +1,54 @@
+buildscript {
+	ext {
+		guavaVersion = '26.0-jre'
+		springBootVersion = '2.0.4.RELEASE'
+		hazelcastVersion = '3.10.4'
+		lombokVersion = '1.18.2'
+		vertxVersion = '3.5.3'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.dis'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile("com.google.guava:guava:$guavaVersion")
+	compile('org.springframework.boot:spring-boot-starter')
+
+	compile("com.hazelcast:hazelcast:$hazelcastVersion")
+	compile("com.hazelcast:hazelcast-client:$hazelcastVersion")
+	compile("com.hazelcast:hazelcast-spring:$hazelcastVersion")
+
+	compile("io.vertx:vertx-core:$vertxVersion")
+	compile("io.vertx:vertx-web:$vertxVersion")
+	compile("io.vertx:vertx-zookeeper:$vertxVersion"){
+		exclude(module:"commons-logging")
+		exclude(module:"slf4j-log4j12")
+		exclude(module:"log4j")
+	}
+	compile("io.vertx:vertx-jdbc-client:$vertxVersion")
+	compile("io.vertx:vertx-redis-client:$vertxVersion")
+	compile("io.vertx:vertx-rabbitmq-client:$vertxVersion")
+
+
+	compileOnly("org.projectlombok:lombok:${lombokVersion}")
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
