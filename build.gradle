@@ -5,6 +5,7 @@ buildscript {
 		hazelcastVersion = '3.10.4'
 		lombokVersion = '1.18.2'
 		vertxVersion = '3.5.3'
+		rocksdbVersion = '5.11.3'
 	}
 	repositories {
 		mavenCentral()
@@ -46,7 +47,7 @@ dependencies {
 	compile("io.vertx:vertx-jdbc-client:$vertxVersion")
 	compile("io.vertx:vertx-redis-client:$vertxVersion")
 	compile("io.vertx:vertx-rabbitmq-client:$vertxVersion")
-
+	compile("org.rocksdb:rocksdbjni:$rocksdbVersion")
 
 	compileOnly("org.projectlombok:lombok:${lombokVersion}")
 
