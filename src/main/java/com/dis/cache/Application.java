@@ -6,14 +6,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GradleBuildApplication {
+public class Application {
 
     @Autowired
     private static HazelcastClient hazelcastClient;
 
     public static void main(String[] args) {
 
-        SpringApplication.run(GradleBuildApplication.class, args);
+        SpringApplication.run(Application.class, args);
         //hazelcastClient.startClient();
     }
 

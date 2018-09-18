@@ -2,6 +2,7 @@ package com.dis.cache.vertx;
 
 import com.dis.cache.util.BusAddress;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServer;
@@ -12,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
@@ -69,10 +72,11 @@ public class WebVerticle extends AbstractVerticle {
             });
 
             vertx.eventBus().publish(BusAddress.topicAddress, "send test Topic msg");
-
         });
 
-
+        vertx.setPeriodic(TimeUnit.MINUTES.toMillis(1), id -> {
+            log.info("vertx deploymentIDs: {}", vertx.deploymentIDs());
+        });
 
         httpServer.requestHandler(router::accept).listen(port);
         log.info("vertx httpServer start");

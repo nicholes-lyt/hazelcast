@@ -13,7 +13,7 @@ public class ReceiveVerticle extends AbstractVerticle {
 
     @Override
     public void start(Future<Void> future) throws Exception {
-        vertx.eventBus().consumer(BusAddress.msgAddress, this::receive);
+        vertx.eventBus().localConsumer(BusAddress.msgAddress, this::receive);
         vertx.eventBus().consumer(BusAddress.topicAddress, this::receive);
         future.complete();
     }
