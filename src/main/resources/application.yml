@@ -28,3 +28,10 @@ spring:
       port: 8081
   zk:
     url: localhost:2181
+
+  rabbitmq:
+    uri: amqp://guest:guest@localhost:5672
+    networkRecoveryInterval: 2000
+    queue: "queue-1"
+
+

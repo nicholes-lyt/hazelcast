@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReceiveVerticle extends AbstractVerticle {
 
+
     @Override
     public void start(Future<Void> future) throws Exception {
         vertx.eventBus().localConsumer(BusAddress.msgAddress, this::receive);

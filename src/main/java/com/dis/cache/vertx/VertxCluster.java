@@ -1,5 +1,7 @@
 package com.dis.cache.vertx;
 
+import com.dis.cache.service.RabbitMQService;
+import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,12 @@ public class VertxCluster {
 
     @Resource
     private VertxOptions vertxOptions;
+
+    @Autowired
+    private RabbitMQService rabbitMQService;
+
+    @Resource
+    private DeploymentOptions deploymentOptions;
 
     private Vertx vertx;
 
@@ -56,6 +64,8 @@ public class VertxCluster {
                         log.warn("receiveVerticle start faile");
                     }
                 });
+
+                vertx.deployVerticle(rabbitMQService,new DeploymentOptions(deploymentOptions));
 
             } else {
                 log.error("Vertx集群启动失败", res.cause());
